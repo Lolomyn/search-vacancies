@@ -33,7 +33,12 @@ class JSONSaver(AbstractSaver):
 
     def save_to_json(self, vacancies: list) -> None:
         """Сохранение переданных вакансий в JSON"""
-        self._save_data(vacancies)
+        data = self._load_data()
+
+        for vacancy in vacancies:
+            data.append(vacancy)
+
+        self._save_data(data)
 
     def add_vacancy(self, vacancy: Vacancy) -> None:
         """Добавить вакансию в JSON-файл"""

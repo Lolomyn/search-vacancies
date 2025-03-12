@@ -45,6 +45,6 @@ def print_vacancies(vacancies: list) -> None:
             f"{i}. {vacancy['name']} "
             f"({vacancy['salary']['from']} - {vacancy['salary']['to']} {vacancy['salary']['currency']})"
         )
-        print(f"   {vacancy['url']}\n")
+        print(f"   {vacancy['alternate_url']}\n")
         print(f"   {vacancy['snippet']['requirement']}")
         print(f"   {vacancy['snippet']['responsibility']}\n")

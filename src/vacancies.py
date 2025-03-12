@@ -19,11 +19,11 @@ class Vacancy:
         self.responsibility = responsibility  # Обязанности
 
     @staticmethod
-    def __check_salary(salary: int) -> Any[str, int]:
+    def __check_salary(salary: int) -> [str, int]:
         """Проверка указана ли зарплата"""
         return salary if isinstance(salary, int) and salary > 0 else "Не указана"
 
-    def __lt__(self, other: Any) -> Any[bool]:
+    def __lt__(self, other: Any) -> [bool]:
         """Реализация функциональности оператора сравнения «меньше» (<)"""
         if isinstance(other, Vacancy):
             if self.salary_to == "Не указана":
@@ -33,7 +33,7 @@ class Vacancy:
             return self.salary_to < other.salary_to
         return NotImplemented
 
-    def __le__(self, other: Any) -> Any[bool]:
+    def __le__(self, other: Any) -> [bool]:
         """Реализация функциональности оператора сравнения «меньше или равно» (<=)"""
         if isinstance(other, Vacancy):
             if self.salary_to == "Не указана" or other.salary_to == "Не указана":
@@ -41,7 +41,7 @@ class Vacancy:
             return self.salary_to <= other.salary_to
         return NotImplemented
 
-    def __gt__(self, other: Any) -> Any[bool]:
+    def __gt__(self, other: Any) -> [bool]:
         """Реализация функциональности оператора сравнения «больше» (>)"""
         if isinstance(other, Vacancy):
             if self.salary_to == "Не указана":
@@ -51,7 +51,7 @@ class Vacancy:
             return self.salary_to > other.salary_to
         return NotImplemented
 
-    def __ge__(self, other: Any) -> Any[bool]:
+    def __ge__(self, other: Any) -> [bool]:
         """Реализация функциональности оператора сравнения «больше или равно» (>=)"""
         if isinstance(other, Vacancy):
             if self.salary_to == "Не указана" or other.salary_to == "Не указана":
