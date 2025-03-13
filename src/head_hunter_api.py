@@ -24,13 +24,13 @@ class HeadHunterAPI(Parser):
         """Конструктор параметров для работы с API HeadHunter"""
         self.__url = "https://api.hh.ru/vacancies"
         self.__headers = {"User-Agent": "HH-User-Agent"}
-        self.__params = {"text": "", "page": 0, "per_page": 100}
+        self.__params = {"text": "", "page": 0, "per_page": 10}
         self.__vacancies: list = []
 
     def _load_vacancies(self, keyword: str) -> None:
         """Загрузка вакансий из API"""
         self.__params["text"] = keyword
-        while self.__params.get("page") != 20:
+        while self.__params.get("page") != 2:
             response = requests.get(self.__url, headers=self.__headers, params=self.__params)
             if response.status_code == 200:
                 vacancies = response.json()["items"]

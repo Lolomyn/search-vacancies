@@ -41,10 +41,7 @@ def get_top_vacancies(vacancies: list, top_n: int) -> list:
 def print_vacancies(vacancies: list) -> None:
     """Вывод на экран вакансий"""
     for i, vacancy in enumerate(vacancies, 1):
-        print(
-            f"{i}. {vacancy['name']} "
-            f"({vacancy['salary']['from']} - {vacancy['salary']['to']} {vacancy['salary']['currency']})"
-        )
-        print(f"   {vacancy['alternate_url']}\n")
+        print(f"{i}. {vacancy['name']} " f"({vacancy['salary']['from']} - {vacancy['salary']['to']})")
+        print(f"   {vacancy['url']}\n")
         print(f"   {vacancy['snippet']['requirement']}")
         print(f"   {vacancy['snippet']['responsibility']}\n")

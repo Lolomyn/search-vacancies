@@ -34,9 +34,23 @@ class JSONSaver(AbstractSaver):
     def save_to_json(self, vacancies: list) -> None:
         """Сохранение переданных вакансий в JSON"""
         data = self._load_data()
+        existing_urls = {item["url"] for item in data}
 
         for vacancy in vacancies:
-            data.append(vacancy)
+            if vacancy["url"] not in existing_urls:
+                item = {
+                    "name": vacancy["name"],
+                    "url": vacancy["url"],
+                    "salary": {
+                        "from": vacancy["salary"]["from"],
+                        "to": vacancy["salary"]["to"],
+                    },
+                    "snippet": {
+                        "requirement": vacancy["snippet"]["requirement"],
+                        "responsibility": vacancy["snippet"]["responsibility"],
+                    },
+                }
+                data.append(item)
 
         self._save_data(data)
 
@@ -59,7 +73,7 @@ class JSONSaver(AbstractSaver):
             )
             self._save_data(data)
 
-    def get_vacancies(self, criteria: str) -> list[Any]:
+    def get_vacancies(self, criteria: str) -> list:
         """Получить вакансии из JSON-файла"""
         data: list = self._load_data()
         result = []
@@ -73,7 +87,7 @@ class JSONSaver(AbstractSaver):
     def delete_vacancy(self, vacancy: Vacancy) -> None:
         """Удалить вакансию из JSON-файла"""
         data: list = self._load_data()
-        data = [item for item in data if not (item["name"] == vacancy.name and item["alternate_url"] == vacancy.url)]
+        data = [item for item in data if not (item["name"] == vacancy.name and item["url"] == vacancy.url)]
         self._save_data(data)
 
     def _load_data(self) -> Any:
